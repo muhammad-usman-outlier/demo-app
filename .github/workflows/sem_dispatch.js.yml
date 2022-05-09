@@ -44,5 +44,5 @@ jobs:
         --header 'Content-Type: application/json' \
         --header 'Authorization: token ${{secrets.GH_TOKEN}}' \
         --header 'Accept: application/vnd.github.everest-preview+json' \
-        --data-raw '{"event_type": ${{EVENT}},"client_payload":{"url": ${{URL}} }}'
+        --data-raw '{"event_type": "${{EVENT}"},"client_payload":{"url": "${{URL}}" }}'
 
