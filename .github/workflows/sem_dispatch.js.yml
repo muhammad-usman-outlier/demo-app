@@ -40,5 +40,9 @@ jobs:
         URL: ${{steps.waitFor200.outputs.url}}
 
       run: |
-        curl -d "{\"event_type\": \"${EVENT}\",\"preview_url\": \"${URL}\"}" -H "Content-Type: application/json" -H "Authorization: token ${GH_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
+        curl --location --request POST 'https://api.github.com/repos/${{ORG}}/${{REPO}}/dispatches' \
+        --header 'Content-Type: application/json' \
+        --header 'Authorization: token ${{secrets.GH_TOKEN}}' \
+        --header 'Accept: application/vnd.github.everest-preview+json' \
+        --data-raw '{"event_type": ${{EVENT}},"client_payload":{"url": ${{URL}} }}'
 
