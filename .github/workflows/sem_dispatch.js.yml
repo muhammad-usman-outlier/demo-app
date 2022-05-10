@@ -100,13 +100,13 @@ jobs:
         index: 12
     - name: Log results
       run: |
-        echo " ${{ steps.get-preview-url1.outputs.comment_url }} ${{ steps.get-preview-url2.outputs.comment_url }}
-         ${{ steps.get-preview-url3.outputs.comment_url }} ${{ steps.get-preview-url4.outputs.comment_url }}
-          ${{ steps.get-preview-url5.outputs.comment_url }} ${{ steps.get-preview-url6.outputs.comment_url }}
-           ${{ steps.get-preview-url7.outputs.comment_url }} ${{ steps.get-preview-url8.outputs.comment_url }}
-            ${{ steps.get-preview-url9.outputs.comment_url }} ${{ steps.get-preview-url10.outputs.comment_url }}
-             ${{ steps.get-preview-url11.outputs.comment_url }} ${{ steps.get-preview-url12.outputs.comment_url }}
-              ${{ steps.get-preview-url13.outputs.comment_url }} ${{ steps.get-preview-url14.outputs.comment_url }}"
+        echo " 0${{ steps.get-preview-url1.outputs.comment_url }} 1${{ steps.get-preview-url2.outputs.comment_url }}
+         2${{ steps.get-preview-url3.outputs.comment_url }} 3${{ steps.get-preview-url4.outputs.comment_url }}
+          4${{ steps.get-preview-url5.outputs.comment_url }} 5${{ steps.get-preview-url6.outputs.comment_url }}
+           6${{ steps.get-preview-url7.outputs.comment_url }} 7${{ steps.get-preview-url8.outputs.comment_url }}
+            8${{ steps.get-preview-url9.outputs.comment_url }} 9${{ steps.get-preview-url10.outputs.comment_url }}
+             10${{ steps.get-preview-url11.outputs.comment_url }} 11${{ steps.get-preview-url12.outputs.comment_url }}
+              12${{ steps.get-preview-url13.outputs.comment_url }} 13${{ steps.get-preview-url14.outputs.comment_url }}"
 #     - name: Waiting for 200 from the Netlify Preview
 #       uses: jakepartusch/wait-for-netlify-action@v1.3
 #       id: waitFor200
