@@ -20,21 +20,93 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - id: get-preview-url
+    - id: get-preview-url1
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
-        pattern: Your Render PR Server URL
+        pattern: Follow its progress at
+        index: 0
+    - id: get-preview-url2
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 1
+    - id: get-preview-url3
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 2
+    - id: get-preview-url4
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 3
+    - id: get-preview-url5
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 4
+    - id: get-preview-url6
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
         index: 5
-    - id: get-serviceId-from-url
+    - id: get-preview-url7
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
-        pattern: Your Render PR Server URL
+        pattern: Follow its progress at
         index: 6
+    - id: get-preview-url8
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 7
+    - id: get-preview-url9
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 8
+    - id: get-preview-url10
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 9
+    - id: get-preview-url11
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 10
+    - id: get-preview-url12
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 11
+    - id: get-preview-url14
+      uses: patzick/action-get-comment-url@v1
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        pattern: Follow its progress at
+        index: 12
     - name: Log results
       run: |
-        echo " ${{ steps.get-preview-url.outputs.comment_url }} ${{ steps.get-serviceId-from-url.outputs.comment_url }}"
+        echo " ${{ steps.get-preview-url1.outputs.comment_url }} ${{ steps.get-preview-url2.outputs.comment_url }}
+         ${{ steps.get-preview-url3.outputs.comment_url }} ${{ steps.get-preview-url4.outputs.comment_url }}
+          ${{ steps.get-preview-url5.outputs.comment_url }} ${{ steps.get-preview-url6.outputs.comment_url }}
+           ${{ steps.get-preview-url7.outputs.comment_url }} ${{ steps.get-preview-url8.outputs.comment_url }}
+            ${{ steps.get-preview-url9.outputs.comment_url }} ${{ steps.get-preview-url10.outputs.comment_url }}
+             ${{ steps.get-preview-url11.outputs.comment_url }} ${{ steps.get-preview-url12.outputs.comment_url }}
+              ${{ steps.get-preview-url13.outputs.comment_url }} ${{ steps.get-preview-url14.outputs.comment_url }}"
 #     - name: Waiting for 200 from the Netlify Preview
 #       uses: jakepartusch/wait-for-netlify-action@v1.3
 #       id: waitFor200
