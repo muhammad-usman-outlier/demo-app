@@ -32,9 +32,16 @@ jobs:
         token: ${{ secrets.GH_TOKEN }}
         pattern: Follow its progress at
         index: 3
+    - name: Regex Extractor
+      id: regex-extractor
+      uses: begedin/variable-regex-extractor-action@v0.2.1
+      with:
+          pattern: |
+              `service_id:(?<=srv-)[\s\S]*` 
     - name: Log results
       run: |
-        echo " preview-url: ${{ steps.get-preview-url.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}"
+        echo " preview-url: ${{ steps.get-preview-url1.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}
+        ${{ steps.regex-extractor.outputs.service_id }}"
 #     - name: Waiting for 200 from the Netlify Preview
 #       uses: jakepartusch/wait-for-netlify-action@v1.3
 #       id: waitFor200
