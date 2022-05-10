@@ -34,7 +34,7 @@ jobs:
         index: 3
     - name: Log results
       run: |
-        echo " preview-url: ${{ steps.get-preview-url1.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}"
+        echo " preview-url: ${{ steps.get-preview-url.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}"
 #     - name: Waiting for 200 from the Netlify Preview
 #       uses: jakepartusch/wait-for-netlify-action@v1.3
 #       id: waitFor200
