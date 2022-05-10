@@ -36,7 +36,7 @@ jobs:
       id: render-id
       uses: AsasInnab/regex-action@v1
       with:
-        regex_pattern: '(?<=srv-)[\s\S]*'
+        regex_pattern: '(?<=dashboard.render.com\/static\/srv-)[\s\S][^!.]*'
         regex_flags: 'gim'
         search_string: '${{ steps.get-serviceId-url.outputs.comment_url }}'
     - name: Echo Render deploy service-id
