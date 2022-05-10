@@ -24,12 +24,14 @@ jobs:
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
-        pattern: https://demoapplication
+        pattern: Your Render PR Server URL
+        index: 1
     - id: get-serviceId-from-url
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
-        pattern: https://dashboard.render.com
+        pattern: Your Render PR Server URL
+        index: 2
     - name: Log results
       run: |
         echo " ${{ steps.get-preview-url.outputs.comment_url }} ${{ steps.get-serviceId-from-url.outputs.comment_url }}"
