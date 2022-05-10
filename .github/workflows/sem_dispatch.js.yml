@@ -44,6 +44,14 @@ jobs:
     - name: Log results
       run: |
         echo " preview-url: ${{ steps.get-preview-url1.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}"
+    - name: Wait for Render Deployment
+      with:
+            email: ${{ secrets.RENDER_EMAIL }}
+            password: ${{ secrets.RENDER_PASSWORD }}
+            token: ${{ secrets.GH_TOKEN }}
+            service-id: srv-${{ steps.render-id.outputs.first_match }}
+      uses: Bounceapp/render-action@0.2.4
+
 #     - name: Waiting for 200 from the Netlify Preview
 #       uses: jakepartusch/wait-for-netlify-action@v1.3
 #       id: waitFor200
