@@ -17,21 +17,26 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    
+#     Get Preview URL from Render Deploy Comment in PR
     - id: get-preview-url
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
         pattern: Follow its progress at
         index: 2
+        
+#     Get Progress URL from Render Deploy Comment in PR
     - id: get-serviceId-url
       uses: patzick/action-get-comment-url@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
         pattern: Follow its progress at
         index: 3
+        
+ #     Extract Service-ID from Progress URL
     - name: Find Render deploy service-id
       id: render-id
       uses: AsasInnab/regex-action@v1
@@ -39,11 +44,8 @@ jobs:
         regex_pattern: '(?<=dashboard.render.com\/static\/srv-)[\s\S][^!.]*'
         regex_flags: 'gim'
         search_string: '${{ steps.get-serviceId-url.outputs.comment_url }}'
-    - name: Echo Render deploy service-id
-      run: echo "Render deploy service-id is ${{ steps.render-id.outputs.first_match }}"
-    - name: Log results
-      run: |
-        echo " preview-url: ${{ steps.get-preview-url1.outputs.comment_url }} service-id: ${{ steps.get-serviceId-url.outputs.comment_url }}"
+        
+#     Wait for Render URL to successfully deploy
     - name: Wait for Render Deployment
       with:
             email: ${{ secrets.RENDER_EMAIL }}
@@ -51,20 +53,14 @@ jobs:
             token: ${{ secrets.GH_TOKEN }}
             service-id: srv-${{ steps.render-id.outputs.first_match }}
       uses: Bounceapp/render-action@0.2.4
-
-#     - name: Waiting for 200 from the Netlify Preview
-#       uses: jakepartusch/wait-for-netlify-action@v1.3
-#       id: waitFor200
-#       with:
-#         site_name: "aquamarine-trifle-1dcfd6"
-# 
-#     - name: send repository dispatch
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#         EVENT: dispatchSEM
-#         ORG: muhammad-usman-outlier
-#         REPO: cypress-e2e
-#         PREVIEW_URL: ${{steps.waitFor200.outputs.url}}
-
-#       run: |
-#         curl -d "{\"event_type\": \"${EVENT}\",\"client_payload\": {\"url\": \"${PREVIEW_URL}\"}}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
+      
+#     Dispatch Preview URL to Cypress-e2e Repository
+    - name: Send Repository Dispatch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        EVENT: dispatchSEM
+        ORG: muhammad-usman-outlier
+        REPO: cypress-e2e
+        PREVIEW_URL: ${{ steps.get-preview-url.outputs.comment_url }}
+      run: |
+        curl -d "{\"event_type\": \"${EVENT}\",\"client_payload\": {\"url\": \"${PREVIEW_URL}\"}}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
