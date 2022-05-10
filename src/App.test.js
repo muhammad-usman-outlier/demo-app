@@ -8,6 +8,7 @@ test('renders learn react link', () => {
   expect(linkElement).toBeInTheDocument()
 })
 
+jest.setTimeout(100000)
 var foo = 1;
 beforeAll(function(done) {
   setTimeout(function(){
@@ -16,7 +17,6 @@ beforeAll(function(done) {
   }, 900000)
 });
 
-jest.setTimeout(900001)
 describe("Async setup", function(){
 
   it("should have foo equal to 2.", function(done){
