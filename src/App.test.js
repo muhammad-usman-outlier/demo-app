@@ -1,32 +1,22 @@
 /* eslint-disable jest/valid-expect */
-import { render, screen } from '@testing-library/react'
-import App from './App'
+jest.setTimeout(900000)
 
-test('renders learn react link', () => {
-  render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+describe('Async setup', function () {
+  var foo = 1
+  beforeEach(function (done) {
+    setTimeout(function () {
+      foo = 2
+      done()
+    }, 400000)
+  })
+
+  it('should have foo equal to 2.', function (done) {
+    expect(foo).toEqual(2)
+    done()
+  })
+
+  it('should have foo not equal 3.', function (done) {
+    expect(foo).not.toEqual(3)
+    done()
+  })
 })
-
-jest.setTimeout(100000)
-var foo = 1;
-beforeAll(function(done) {
-  setTimeout(function(){
-    foo = 2;
-    done();
-  }, 900000)
-});
-
-describe("Async setup", function(){
-
-  it("should have foo equal to 2.", function(done){
-    expect(foo).toEqual(2);
-    done();
-  });
-
-  it("should have foo not equal 3.", function(done){
-    expect(foo).not.toEqual(3);
-    done();
-  });
-
-});
