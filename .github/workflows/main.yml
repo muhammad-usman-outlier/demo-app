@@ -22,11 +22,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Render Deploy
       - id: render-deploy
+        uses: muhammad-usman-outlier/actions-demo@main
         with: 
           token: ${{ secrets.GH_TOKEN }}
           email: ${{ secrets.RENDER_EMAIL }}
           password: ${{ secrets.RENDER_PASSWORD }}
-        uses: muhammad-usman-outlier/actions-demo@main
 
       # Runs a set of commands using the runners shell
       - name: Echo deploy
