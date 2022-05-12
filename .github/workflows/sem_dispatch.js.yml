@@ -20,47 +20,60 @@ jobs:
 
     steps:
     
-#     Get Preview URL from Render Deploy Comment in PR
-    - id: get-preview-url
-      uses: patzick/action-get-comment-url@v1
-      with:
-        token: ${{ secrets.GH_TOKEN }}
-        pattern: Follow its progress at
-        index: 2
-        
-#     Get Progress URL from Render Deploy Comment in PR
-    - id: get-serviceId-url
-      uses: patzick/action-get-comment-url@v1
-      with:
-        token: ${{ secrets.GH_TOKEN }}
-        pattern: Follow its progress at
-        index: 3
-        
- #     Extract Service-ID from Progress URL
-    - name: Find Render deploy service-id
-      id: render-id
-      uses: AsasInnab/regex-action@v1
-      with:
-        regex_pattern: '(?<=dashboard.render.com\/static\/srv-)[\s\S][^!.]*'
-        regex_flags: 'gim'
-        search_string: '${{ steps.get-serviceId-url.outputs.comment_url }}'
-        
-#     Wait for Render URL to successfully deploy
-    - name: Wait for Render Deployment
-      with:
-            email: ${{ secrets.RENDER_EMAIL }}
-            password: ${{ secrets.RENDER_PASSWORD }}
-            token: ${{ secrets.GH_TOKEN }}
-            service-id: srv-${{ steps.render-id.outputs.first_match }}
-      uses: Bounceapp/render-action@0.2.4
-      
-#     Dispatch Preview URL to Cypress-e2e Repository
-    - name: Send Repository Dispatch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        EVENT: dispatchSEM
-        ORG: muhammad-usman-outlier
-        REPO: cypress-e2e
-        PREVIEW_URL: ${{ steps.get-preview-url.outputs.comment_url }}
+    - name: Render Deploy
+    - id: render-deploy
+      uses: muhammad-usman-outlier/actions-demo@main
+      with: 
+          token: ${{ secrets.GH_TOKEN }}
+          email: ${{ secrets.RENDER_EMAIL }}
+          password: ${{ secrets.RENDER_PASSWORD }}
+
+      # Runs a set of commands using the runners shell
+    - name: Echo deploy
       run: |
-        curl -d "{\"event_type\": \"${EVENT}\",\"client_payload\": {\"url\": \"${PREVIEW_URL}\"}}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
+          echo ${{ steps.render-deploy.outputs.preview-url }}
+    
+# #     Get Preview URL from Render Deploy Comment in PR
+#     - id: get-preview-url
+#       uses: patzick/action-get-comment-url@v1
+#       with:
+#         token: ${{ secrets.GH_TOKEN }}
+#         pattern: Follow its progress at
+#         index: 2
+        
+# #     Get Progress URL from Render Deploy Comment in PR
+#     - id: get-serviceId-url
+#       uses: patzick/action-get-comment-url@v1
+#       with:
+#         token: ${{ secrets.GH_TOKEN }}
+#         pattern: Follow its progress at
+#         index: 3
+        
+#  #     Extract Service-ID from Progress URL
+#     - name: Find Render deploy service-id
+#       id: render-id
+#       uses: AsasInnab/regex-action@v1
+#       with:
+#         regex_pattern: '(?<=dashboard.render.com\/static\/srv-)[\s\S][^!.]*'
+#         regex_flags: 'gim'
+#         search_string: '${{ steps.get-serviceId-url.outputs.comment_url }}'
+        
+# #     Wait for Render URL to successfully deploy
+#     - name: Wait for Render Deployment
+#       with:
+#             email: ${{ secrets.RENDER_EMAIL }}
+#             password: ${{ secrets.RENDER_PASSWORD }}
+#             token: ${{ secrets.GH_TOKEN }}
+#             service-id: srv-${{ steps.render-id.outputs.first_match }}
+#       uses: Bounceapp/render-action@0.2.4
+      
+# #     Dispatch Preview URL to Cypress-e2e Repository
+#     - name: Send Repository Dispatch
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#         EVENT: dispatchSEM
+#         ORG: muhammad-usman-outlier
+#         REPO: cypress-e2e
+#         PREVIEW_URL: ${{ steps.get-preview-url.outputs.comment_url }}
+#       run: |
+#         curl -d "{\"event_type\": \"${EVENT}\",\"client_payload\": {\"url\": \"${PREVIEW_URL}\"}}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
