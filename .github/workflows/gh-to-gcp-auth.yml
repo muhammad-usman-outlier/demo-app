@@ -47,7 +47,7 @@ jobs:
           
       - id: 'invoke-service'
         run: |-
-          curl https://cypress-2pp3iipi7a-uc.a.run.app/run-test \
+          curl https://cypress-2pp3iipi7a-uc.a.run.app/run-test --request POST \
             --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
 
 #     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
