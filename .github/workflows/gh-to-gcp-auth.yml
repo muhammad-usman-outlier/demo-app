@@ -47,7 +47,7 @@ jobs:
           
       - id: 'invoke-service'
         run: |-
-          curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
+          curl --location --request GET 'https://cypress-2pp3iipi7a-uc.a.run.app' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
 
 #     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
 #       - name: 'Set up Cloud SDK'
