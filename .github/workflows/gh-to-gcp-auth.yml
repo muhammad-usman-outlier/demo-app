@@ -36,14 +36,20 @@ jobs:
         with:
           workload_identity_provider: 'projects/82587591505/locations/global/workloadIdentityPools/gh-pool/providers/gh-provider'
           service_account: 'cypress-test@local-passage-318821.iam.gserviceaccount.com'
-          audience: 'google-wilf'
+          id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
+          token_format: 'id_token'
+          id_token_include_email: true
+          
+      - name: 'Echo'
+        run: |
+          echo ${{ steps.auth.outputs.id_token }}
 
-    # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
+#     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
+#       - name: 'Set up Cloud SDK'
+#         uses: 'google-github-actions/setup-gcloud@v0'
 
-    # Now you can run gcloud commands authenticated as the impersonated service account.
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |-
-          gcloud secrets versions access "latest" --secret "my-secret"
+#     # Now you can run gcloud commands authenticated as the impersonated service account.
+#       - id: 'gcloud'
+#         name: 'gcloud'
+#         run: |-
+#           gcloud secrets versions access "latest" --secret "my-secret"
