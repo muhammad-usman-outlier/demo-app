@@ -49,6 +49,16 @@ jobs:
         run: |-
           curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
 
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GH_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
 #     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
 #       - name: 'Set up Cloud SDK'
 #         uses: 'google-github-actions/setup-gcloud@v0'
