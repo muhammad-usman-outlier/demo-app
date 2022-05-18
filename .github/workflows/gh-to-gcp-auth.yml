@@ -36,6 +36,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/82587591505/locations/global/workloadIdentityPools/gh-pool/providers/gh-provider'
           service_account: 'cypress-test@local-passage-318821.iam.gserviceaccount.com'
+          audience: 'google-wilf'
 
     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
       - name: 'Set up Cloud SDK'
