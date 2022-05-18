@@ -41,9 +41,14 @@ jobs:
           id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
           id_token_include_email: true 
           
-      - name: 'Echo'
-        run: |
-          echo ${{ steps.auth.outputs.id_token }}
+#       - name: 'Echo'
+#         run: |
+#           echo ${{ steps.auth.outputs.id_token }}
+          
+      - id: 'invoke-service'
+        run: |-
+          curl https://cypress-2pp3iipi7a-uc.a.run.app \
+            --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
 
 #     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
 #       - name: 'Set up Cloud SDK'
