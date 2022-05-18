@@ -34,9 +34,12 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'
         with:
+          token_format: 'id_token'
           workload_identity_provider: 'projects/82587591505/locations/global/workloadIdentityPools/gh-pool/providers/gh-provider'
           service_account: 'cypress-test@local-passage-318821.iam.gserviceaccount.com'
           audience: 'google-wlif'
+          id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
+          id_token_include_email: true 
           
       - name: 'Echo'
         run: |
