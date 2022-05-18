@@ -36,9 +36,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/82587591505/locations/global/workloadIdentityPools/gh-pool/providers/gh-provider'
           service_account: 'cypress-test@local-passage-318821.iam.gserviceaccount.com'
-          id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
-          token_format: 'id_token'
-          id_token_include_email: true
+          audience: 'google-wilf.'
           
       - name: 'Echo'
         run: |
