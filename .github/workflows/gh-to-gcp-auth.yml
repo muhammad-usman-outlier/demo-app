@@ -42,14 +42,14 @@
       - id: 'invoke-service'
         run: |-
           res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}") | jq -r '.totalTests'
-          echo ::set-output name=result::$res
+          ::set-output name=result::$res
           echo response result total: $res.*.totalTests
           echo response result passed: $res.*.totalPassed
           echo response result failed: $res.*.totalFailed
           
       - name: 'Echo Results'
         run: |
-          echo result: ${{steps.invoke-service.outputs.result}}
+          echo result: $result
           
 
 #       - uses: actions/github-script@v3
