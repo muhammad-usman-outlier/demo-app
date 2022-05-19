@@ -50,8 +50,7 @@ jobs:
           echo totalFailed: ${{ steps.invoke-service.outputs.totalFailed }}
           echo totalTests: ${{ steps.invoke-service.outputs.res[0].totalTests }}
           echo totalTests: ${{ steps.invoke-service.outputs.res.totalTests }}
-          echo totalTests: ${ $res[0].totalTests }
-          echo totalTests: ${{ $res[0].totalTests }}
+          echo totalTests: "$res"
 
 #       - uses: actions/github-script@v3
 #         with:
