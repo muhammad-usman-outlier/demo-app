@@ -45,18 +45,20 @@ jobs:
           
       - name: 'Echo'
         run: |
-          echo ${{ steps.invoke-service.outputs }}
+          echo totalTests: ${{ steps.invoke-service.outputs.totalTests }}
+          echo totalPassed: ${{ steps.invoke-service.outputs.totalPassed }}
+          echo totalFailed: ${{ steps.invoke-service.outputs.totalFailed }}
 
-      - uses: actions/github-script@v3
-        with:
-          github-token: ${{secrets.GH_TOKEN}}
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+#       - uses: actions/github-script@v3
+#         with:
+#           github-token: ${{secrets.GH_TOKEN}}
+#           script: |
+#             github.issues.createComment({
+#               issue_number: context.issue.number,
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               body: '👋 Thanks for reporting!'
+#             })
 #     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
 #       - name: 'Set up Cloud SDK'
 #         uses: 'google-github-actions/setup-gcloud@v0'
