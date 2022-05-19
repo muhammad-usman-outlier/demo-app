@@ -41,11 +41,11 @@ jobs:
           
       - id: 'invoke-service'
         run: |-
-          shell_exec("curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"' > /dev/null 2>/dev/null &")
+          curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}" > /dev/null 2>&1 &
           
-      - name: 'Echo Results'
-        run: |
-          echo result
+      # - name: 'Echo Results'
+      #   run: |
+      #     echo result
           
 
 #       - uses: actions/github-script@v3
