@@ -42,10 +42,11 @@ jobs:
       - id: 'invoke-service'
         run: |-
           res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}") | jq -r '.totalTests'
-          total=$(echo $res | jq '.totalTests')
-          passed=$(echo $res | jq '.totalPassed')
-          failed=$(echo $res | jq '.totalFailed')
-          echo response result total: $res
+          result=`cat $res`
+          total=`echo $(jq -r '.totalTests' <<< "$result")`
+          passed=`echo $(jq -r '.totalPassed' <<< "$result")`
+          failed=`echo $(jq -r '.totalFailed' <<< "$result")`
+          echo response result total: $total
           echo response result passed: $passed
           echo response result failed: $failed
           
