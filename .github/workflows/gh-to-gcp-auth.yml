@@ -41,13 +41,17 @@ jobs:
           
       - id: 'invoke-service'
         run: |-
-          curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}"
+          res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}")
           
       - name: 'Echo Results'
         run: |
           echo totalTests: ${{ steps.invoke-service.outputs.totalTests }}
           echo totalPassed: ${{ steps.invoke-service.outputs.totalPassed }}
           echo totalFailed: ${{ steps.invoke-service.outputs.totalFailed }}
+          echo totalTests: ${{ steps.invoke-service.outputs.res[0].totalTests }}
+          echo totalTests: ${{ steps.invoke-service.outputs.res.totalTests }}
+          echo totalTests: $res.totalTests
+          echo totalTests: $res[0].totalTests
 
 #       - uses: actions/github-script@v3
 #         with:
