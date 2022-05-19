@@ -39,9 +39,11 @@
 #           id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
 #           id_token_include_email: true 
           
-#       - id: 'invoke-service'
-#         run: |-
-#           res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}")
+      - id: 'invoke-service'
+        run: |-
+          res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}")
+          echo response result: $res.totalTests
+          echo response result: $res['totalTests']
           
 #       - uses: actions/github-script@v3
 #         with:
