@@ -16,14 +16,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          submodules: recursive
-        
-      - id: render-deploy
-        uses: ../render-deploy-action
+      - uses: actions/checkout@v3
+
+      # This step references the directory that contains the action.
+      - name: Render Deploy Action         
+        id: render-deploy
+        uses: ./.github/actions/render-deploy-action
         with: 
           token: ${{ secrets.GH_TOKEN }}
           render-email: ${{ secrets.RENDER_EMAIL }}
