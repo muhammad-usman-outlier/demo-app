@@ -4,8 +4,6 @@ name: Deploy Demo
 
 # Controls when the workflow will run
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -19,7 +17,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:          
       - id: render-deploy
-        uses: muhammad-usman-outlier/render-deploy-action@v1.0.0
+        uses: muhammad-usman-outlier/render-deploy@v1
         with: 
           token: ${{ secrets.GH_TOKEN }}
           render-email: ${{ secrets.RENDER_EMAIL }}
