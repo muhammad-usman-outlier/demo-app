@@ -15,7 +15,12 @@ jobs:
         node-version: [14.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:          
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+        
       - id: render-deploy
         uses: muhammad-usman-outlier/render-deploy@v1
         with: 
