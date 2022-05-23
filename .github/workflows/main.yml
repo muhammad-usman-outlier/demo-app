@@ -21,7 +21,7 @@ jobs:
       # This step references the directory that contains the action.
       - name: Render Deploy Action         
         id: render-deploy
-        uses: muhammad-usman-outlier/render-action-new@v3.2
+        uses: muhammad-usman-outlier/render-action-new@v3.4
         with: 
           token: ${{ secrets.GH_TOKEN }}
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
