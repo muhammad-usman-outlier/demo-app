@@ -21,7 +21,7 @@ jobs:
       # This step references the directory that contains the action.
       - name: Render Deploy Action         
         id: render-deploy
-        uses: ./.github/actions/render-deploy-action
+        uses: muhammad-usman-outlier/render-action-new@v1
         with: 
           token: ${{ secrets.GH_TOKEN }}
           render-email: ${{ secrets.RENDER_EMAIL }}
