@@ -22,11 +22,10 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
         
       - id: render-deploy
-        uses: muhammad-usman-outlier/render-deploy@v1
+        uses: muhammad-usman-outlier/render-action-new@v4.6
         with: 
           token: ${{ secrets.GH_TOKEN }}
-          render-email: ${{ secrets.RENDER_EMAIL }}
-          render-password: ${{ secrets.RENDER_PASSWORD }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
 
       # Runs a set of commands using the runners shell
       - name: Echo deploy
