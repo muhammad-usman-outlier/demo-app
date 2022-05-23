@@ -19,7 +19,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:          
       - id: render-deploy
-        uses: muhammad-usman-outlier/render-action-new@v3.2
+        uses: muhammad-usman-outlier/render-action-new@v4.6
         with: 
           token: ${{ secrets.GH_TOKEN }}
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
