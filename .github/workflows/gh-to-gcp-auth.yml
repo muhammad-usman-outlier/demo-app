@@ -39,36 +39,7 @@ jobs:
           id_token_audience: 'https://cypress-2pp3iipi7a-uc.a.run.app'
           id_token_include_email: true 
           
-      - id: 'invoke-service'
-        run: |-
-          res=$(curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}")
+      # - id: 'invoke-service'
+      #   run: |-
+      #     curl --location --request POST 'https://cypress-2pp3iipi7a-uc.a.run.app/run-test?target="/"' --header "Authorization: Bearer ${{ steps.auth.outputs.id_token }}" > /dev/null 2>&1 &
           
-      - name: 'Echo Results'
-        run: |
-          echo totalTests: ${{ steps.invoke-service.outputs.totalTests }}
-          echo totalPassed: ${{ steps.invoke-service.outputs.totalPassed }}
-          echo totalFailed: ${{ steps.invoke-service.outputs.totalFailed }}
-          echo totalTests: ${{ steps.invoke-service.outputs.res[0].totalTests }}
-          echo totalTests: ${{ steps.invoke-service.outputs.res.totalTests }}
-          echo totalTests: $res.totalTests
-          echo totalTests: $res[0].totalTests
-
-#       - uses: actions/github-script@v3
-#         with:
-#           github-token: ${{secrets.GH_TOKEN}}
-#           script: |
-#             github.issues.createComment({
-#               issue_number: context.issue.number,
-#               owner: context.repo.owner,
-#               repo: context.repo.repo,
-#               body: '👋 Thanks for reporting!'
-#             })
-#     # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
-#       - name: 'Set up Cloud SDK'
-#         uses: 'google-github-actions/setup-gcloud@v0'
-
-#     # Now you can run gcloud commands authenticated as the impersonated service account.
-#       - id: 'gcloud'
-#         name: 'gcloud'
-#         run: |-
-#           gcloud secrets versions access "latest" --secret "my-secret"
