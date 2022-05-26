@@ -23,7 +23,7 @@ jobs:
         id: render-deploy
         uses: muhammad-usman-outlier/render-action-new@v4.6
         with: 
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
           # render-email: ${{ secrets.RENDER_EMAIL }}
           # render-password: ${{ secrets.RENDER_PASSWORD }}
